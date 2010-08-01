@@ -1,3 +1,0 @@
-input_file, SampleOrders
-input_file_dir,C:\SENG3020\testfiles\
-output_file_dir,C:\temp\
