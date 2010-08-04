@@ -1,3 +1,0 @@
-input_file,13870.csv.txt
-input_file_dir,"C:\Users\Gerard Woods\Documents\My Dropbox\eclipse\vista-workspace\se3020\se3020"
-output_file_dir,C:\temp\

@@ -1,0 +1,77 @@
+Determining System specification
+ Main parts
+	- develop a trading engine for securities
+	- take csv files (lists of transactions) as inputs [only quotes]
+	- produce csv files as outputs [will include trades as process of trading engine]
+	- read csv format
+	- get headings order from first line of csv; required to read following lines
+	- read from a configuration file "SystemVars.txt" to get information for the execution; this includes input_file, input_file_dir and output_file_dir
+	- output a file "status.txt" which details the final state of the program "Ok \n <filename & path>" of the output file or "Err \n <message explaining the error>"
+	- check that an input file obeys the syntax including
+		- proper format
+		- each column heading has only proper data
+	- create a order book for bids listed in highest price then earliest time [headings: time, price, Quantity and ID]
+	- create a order book for asks listed in lowest price then earliest time [headings: time, price, Quantity and ID]
+	- each order book should be updated with each line in a inputted csv file
+	- calculate the 'spread', the difference between the highest bid and lowest ask
+	- the orderbook is dynamical changing
+	- lowest price is 1 cent
+	- output orderbook information with a Market Depth transaction, this takes a n and returns the first 2 asks and bids from the orderBook for that instrument. This n is recorded in the configuration file. this is outputed as a csv file with the following name <inputFileName_ob.csv>
+	- operations can be done on the orderbook, including:
+		- submit order: submits a bid or ask to the order book
+		- delete order: removes an order from the order book
+		- amend order changes an existing order, the following amendtions are permitted
+			- decrease volume.
+			- increase volume or amending price: effectively the old order is deleted and replaced by a new one
+	- initially a stand alone application
+	- GUI
+	- must run on (and/or):
+		- windows
+		- Unix/linux
+	- multiple securities
+	- must use SIRCA format for trades/bids etc
+	- match bids against asks and produce a trade output [fields: #Instrument,Date,Time,Record Type,Price,Volume,Value,Trans ID,Bid ID,Ask ID]
+	- during the continuous stage the matching algorithm is run after each market event(submitted orders, amending orders, match events)
+	- rules for the matching algorithm
+		- take the top bid and top ask
+		- trade only occurs if bid price >= sale price, if > then the price is the the first price entered (either the bid or ask price)
+		- the volume is the lowest of the bid and ask volumes
+		- the volume is subtracted from each at which point atleast one of the orders will be removed and a new top bid will appear
+	- generate trade files, csv files with queries and also the trades and the time the trades took place
+	- market phase including in config file [preopen | continuous]
+		- preopen is the previously mentioned behaviour
+		- continuous preforms matching, returns a file <inputfilename_tr.csv> and <inputFileName_ob.csv> (as before)
+ Potential parts
+	- take requests from potential buyers and sellers
+	- represent market stages (opening, setup, continuous etc)
+	- return a number of errors with a csv, where the max number is set by the user
+	- development of a web system
+	- login/out authentictation protocals
+	- system should ignore additional columns
+	
+Initial Design and Project Management (report in progress does not need to be complete)
+ - Introduction and background
+	- hand waving to be done at a later date
+ - Objectives of the project
+	- basically requirements based on the specification above
+	- learning about financial markets
+ - Initial Design/Architecture
+	- class diagram
+	- flow chart 
+	- currently single machine application
+	- potentially client-server or web based architecture, left as a future decision
+ - Methods/technology to be used
+	- java
+	- swing
+	- java coverage checker to further ensure code correctness program -> "Cobertura"
+	- jUnit testing developed before code writing to ensure correctness
+	- github
+	- eclipse
+ - Resources and team member responsibilities
+	- Ahmad: GUI
+	- Tom: lead programmer
+	- JP: programmer
+	- Toni: unknown at this point
+	- Gerard: project management and latex
+ - Activities and a GANTT chart
+	- tomorrow....
